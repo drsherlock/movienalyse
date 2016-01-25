@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header">
+  <h1> {{ object.title }} </h1>
+</div>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <img src="{{ object.image.url }}" class="img-responsive">
+        </div>
+           <table class="table">
+
+           <tr>
+                  <td>
+                      <h4><strong>RATING</strong></h4>
+                  </td>
+                  <td>
+                      <h4>{{ object.rating|floatformat:"1" }}</h4>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <h4><strong>DIRECTOR</strong></h4>
+                  </td>
+                  <td>
+                      <h4>{{ object.director }}</h4>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <h4><strong>LENGTH</strong></h4>
+                  </td>
+                  <td>
+                      <h4>{{ object.movie_length }} HOURS</h4>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <h4><strong>CATEGORY</strong></h4>
+                  </td>
+                  <td>
+                      <h4>{{ object.category }}</h4>
+                  </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="panel panel-default">
+          <div class="panel-body">
+              <p class="lead">{{ object.description }} </p>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <h3> Trailers</h3>
+
+        <table class="table">
+        {% for trailer in trailer_list %}
+        <tr>
+        <td>
+          <div class="embed-responsive embed-responsive-4by3">
+          {{ trailer | safe }}
+          
+          </div>
+          </td>
+          </tr>
+        {% endfor %}
+        
+        </table>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-body">
+          <h4>Give Your Review</h4><br>
+          <form action="{% url 'review' object.pk %}">
+            <input class="btn btn-toolbar" type="submit" value="New Review" />
+          </form>
+          <br>
+          {% for r in review %}
+          <h4>{{ r.rating }}</h4>   
+          <h5>{{ r.comment }}</h5> 
+          <h5>by {{ r.user_id }}</h5>                       
+          
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <h4>Start New Topic</h4><br>
+      <form action="{% url 'topic' object.pk %}">
+          <input class="btn btn-toolbar" type="submit" value="New Topic" />
+        </form>
+        <br>
+        {% for f in forum %}
+        <a href="{% url 'comments' object.pk f.pk %}">
+          <h4>{{ f.topic }}</h4>
+        </a>
+        <h5>by {{ f.started_by }}</h5>
+        <h5>{{ f.created_at }}</h5>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+</div>
+
+{% endblock %}

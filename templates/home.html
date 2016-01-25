@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+    {% block jumbo %}
+
+    <form method="get" action="/search">
+    <div class="col-md-3 col-lg-offset-4">
+          <input class="form-control" type="text" name="q">
+          </div>
+                    <input class="btn btn-toolbar" type="submit" value="Search">
+                        </form>
+                        <br>
+
+  {% for m in movies %}
+<div class="panel panel-warning col-md-6 col-lg-offset-3 ">
+   <div class="panel-body">
+
+     <a href="{% url 'detail' id=m.pk %}"><h3>{{ m.title }}</h3></a>
+  <a href="{% url 'detail' id=m.pk %}"><img src="{{ m.image.url }}" height="200" width="150" class="img-responsive"></a>
+<span>
+    {{ m.description }}
+  Rating - {{ m.rating|floatformat:"1" }}
+</span>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

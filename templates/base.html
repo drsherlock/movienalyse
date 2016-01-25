@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+
+  <body style="background-color:#4DB6AC">
+
+    <!-- Static navbar -->
+
+    {% include 'navbar.html' %}
+
+    {% block jumbo %}
+
+    {% endblock %}
+
+    <div class="container">
+      
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <!-- /container -->
+    {% block content %}
+
+    {% endblock %}
+
+    {% block news %}
+
+    {% endblock %}
+
+    </div>
+   {% include 'javascipt.html' %}
+  </body>
+</html>

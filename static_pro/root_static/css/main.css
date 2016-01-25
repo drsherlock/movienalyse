@@ -1,0 +1,15 @@
+body {
+  min-height: 2000px;
+}
+
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+span {
+  display: inline-block;
+}

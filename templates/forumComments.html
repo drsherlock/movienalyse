@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% load mptt_tags %}
+
+<h3>{{ title.topic }}</h3>
+<ul class="root">
+{% recursetree nodes %}
+  <li type="square">
+      {{ node.comment }}
+      <br>
+      by:{{ node.author }}     at:{{node.created_at}}
+      <form action="{% url 'reply' node.forum.movie_id.pk node.forum.pk node.pk %}">
+        <input class="btn btn-toolbar" type="submit" value="Reply" />
+      </form>
+      {% if not node.is_leaf_node %}
+          <ul class="children">
+              {{ children }}
+          </ul>
+      {% endif %}
+  </li>
+{% endrecursetree %}
+</ul>
+
+{% endblock %}

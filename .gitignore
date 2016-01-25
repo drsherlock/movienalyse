@@ -1,0 +1,7 @@
+*.pyc
+__pycache__
+virmovienalyse
+db.sqlite3
+settings_local.py
+/static
+.DS_Store

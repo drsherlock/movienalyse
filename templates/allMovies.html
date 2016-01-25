@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <form action="{% url 'list' %}" method="GET">
+        <div class="col-md-2"><label class="radio-inline"><input type="radio" name="sort" value="title"> Title</label>
+        <label class="radio-inline"><input type="radio" name="sort" value="rating"> Rating</label></div>
+        <input class="btn btn-toolbar" type="submit" value="Sort" />
+    </form>
+    <br>
+    <table class="table">
+            {% for obj in object %}
+                <tr>
+                <td>
+                    <a href="{% url 'detail' id=obj.pk %}">{{ obj.title }}</a>
+                </td>
+                <td>
+{#                     #}
+                        <a href="{% url 'detail' id=obj.pk %}"><img src="{{ obj.image.url }}" height="100" width="50" class="img-thumbnail"></a>
+                </td>
+                <td>
+                    {{ obj.rating|floatformat:"1" }}
+                </td>
+                </tr>
+
+
+            {% endfor %}
+    </table>
+{% endblock %}
