@@ -49,6 +49,7 @@ def show_detail(request, id):
 def show_comments(request, id1, id2):
     context = {}
     title = Forum.objects.get(pk=id2)
+
     nodes = Body.objects.filter(forum__pk=id2)
     context={
         "title":title,
